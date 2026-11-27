@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Milon Wallet Connect Demo</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f4efe4;
+        --surface: #fffaf2;
+        --ink: #20140e;
+        --muted: #695549;
+        --line: #d7c9b9;
+        --accent: #923a23;
+        font: 16px/1.5 'Segoe UI', sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--paper); color: var(--ink); }
+      main { width: min(68rem, calc(100% - 2rem)); margin: clamp(2rem, 8vw, 6rem) auto; }
+      header { padding-top: 1rem; border-top: 3px solid var(--accent); }
+      h1, h2 { margin: 0; font-family: Georgia, serif; font-weight: 500; line-height: 1.1; }
+      h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); letter-spacing: -.045em; }
+      h2 { font-size: 1.7rem; }
+      p { margin: .5rem 0 0; }
+      .subtitle { color: var(--muted); }
+      .workspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); gap: 1.25rem; margin-top: 2rem; }
+      .controls { display: grid; gap: 1.25rem; }
+      .panel { padding: clamp(1rem, 3vw, 1.6rem); border: 1px solid var(--line); border-radius: .75rem; background: var(--surface); }
+      .button-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr)); gap: .5rem; margin-top: .85rem; }
+      button, textarea { font: inherit; }
+      button { min-height: 2.75rem; padding: .5rem .7rem; border: 1px solid var(--line); border-radius: .35rem; background: var(--surface); color: var(--ink); cursor: pointer; }
+      button:hover:not(:disabled) { border-color: var(--accent); }
+      button.primary { border-color: var(--accent); background: var(--accent); color: #fff; }
+      button.primary:hover:not(:disabled) { background: #762d1b; }
+      button:disabled { opacity: .5; cursor: default; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      #account-status { color: var(--muted); overflow-wrap: anywhere; }
+      label { display: block; margin: 1rem 0 .35rem; font-weight: 600; }
+      textarea { display: block; width: 100%; min-height: 5.25rem; resize: vertical; padding: .65rem .75rem; border: 1px solid var(--line); border-radius: .35rem; background: #fff; color: var(--ink); }
+      .response { background: #272019; color: #fffaf2; border-color: #272019; }
+      #request-status { color: #dfcdbb; overflow-wrap: anywhere; }
+      pre { max-height: 24rem; overflow: auto; margin: 1rem 0 0; padding-top: 1rem; border-top: 1px solid #5c4c3d; font: .875rem/1.55 Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+      pre:focus-visible { outline-color: #dfcdbb; }
+
+      @media (max-width: 46rem) {
+        .workspace { grid-template-columns: minmax(0, 1fr); }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Milon Wallet Connect Demo</h1>
+        <p class="subtitle">Devnet</p>
+      </header>
+
+      <div class="workspace">
+        <div class="controls">
+          <section class="panel">
+            <h2>Wallet</h2>
+            <p id="account-status" role="status">Initializing wallet…</p>
+            <div class="button-row">
+              <button type="button" id="open-button">Open Wallet</button>
+              <button type="button" id="close-button">Close Wallet</button>
+            </div>
+            <div class="button-row">
+              <button type="button" id="connect-button" class="primary">Connect Wallet</button>
+              <button type="button" id="disconnect-button" disabled>Disconnect</button>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h2>Signatures</h2>
+            <form id="sign-form">
+              <label for="message">Message to sign</label>
+              <textarea id="message" required>Hello from Milon Connect Demo.</textarea>
+              <div class="button-row">
+                <button type="submit" id="sign-button" disabled>Sign Message</button>
+                <button type="button" id="login-button" disabled>Request Login</button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <section class="panel response">
+          <h2>Response</h2>
+          <p id="request-status" role="status">No request sent.</p>
+          <pre id="result" tabindex="0"></pre>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
