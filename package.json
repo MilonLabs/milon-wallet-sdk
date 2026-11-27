@@ -1,0 +1,45 @@
+{
+  "name": "@milonlabs/milon-wallet-sdk",
+  "version": "0.1.1",
+  "description": "Browser SDK for connecting dapps to Milon Wallet.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MilonLabs/milon-wallet-sdk.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest --silent=false"
+  },
+  "keywords": [
+    "milon",
+    "wallet",
+    "web3"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "jsdom": "^29.1.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
